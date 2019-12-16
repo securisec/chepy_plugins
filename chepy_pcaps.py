@@ -291,9 +291,11 @@ class PcapUSB:
 
 
 class Pcap(chepy.core.ChepyCore):
-    # def __init__(self, *data):
-    #     super().__init__(*data)
-    #     self._pcap_filepath = None
+    """This plugin allows handling of various pcap 
+    related operations. 
+
+    scapy is a requirement for this plugin.
+    """
 
     @chepy.core.ChepyDecorators.call_stack
     def read_pcap(self):
@@ -305,6 +307,7 @@ class Pcap(chepy.core.ChepyCore):
         self._pcap_filepath = str(self._abs_path(self.state))
         self.state = "Pcap loaded"
         return self
+
     @chepy.core.ChepyDecorators.call_stack
     def pcap_dns_queries(self):
         """Get DNS queries and their frame numbers

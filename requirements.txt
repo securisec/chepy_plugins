@@ -1,2 +1,6 @@
 scapy
+Markdown
 chepy
+pefile
+pyelftools
+ua-parser

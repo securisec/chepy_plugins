@@ -39,6 +39,10 @@ prompt_toolbar_errors = #ff0000
    :caption: Contents:
 
    plugins/pcap.rst
+   plugins/markdown.rst
+   plugins/pefile.rst
+   plugins/elffile.rst
+   plugins/useragent.rst
    core.rst
 
 
