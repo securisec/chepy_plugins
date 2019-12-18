@@ -38,10 +38,11 @@ prompt_toolbar_errors = #ff0000
    :maxdepth: 3
    :caption: Contents:
 
-   plugins/pcap.rst
-   plugins/markdown.rst
-   plugins/pefile.rst
    plugins/elffile.rst
+   plugins/extract.rst
+   plugins/markdown.rst
+   plugins/pcap.rst
+   plugins/pefile.rst
    plugins/useragent.rst
    core.rst
 
