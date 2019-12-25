@@ -2,6 +2,8 @@
     <img src="https://raw.githubusercontent.com/securisec/chepy_plugins/master/logo.png" width="65%">
 </p>
 
+[![](https://img.shields.io/readthedocs/chepy-plugins.svg?logo=read-the-docs&label=Docs)](http://chepy-plugins.readthedocs.io/en/latest/)
+
 # Chepy plugins
 This repository hosts various Plugins for Chepy. Chepy is extendable with custom plugins. The docs for how to create plugins is [here](https://chepy.readthedocs.io/en/latest/plugins.html). All Chepy plugins extend the `ChepyCore` class. Refere to the docs for available methods and attributes for `ChepyCore`. 
 
