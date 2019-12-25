@@ -1,3 +1,4 @@
+import sys
 import binascii
 import collections
 
@@ -297,6 +298,18 @@ class Pcap(chepy.core.ChepyCore):
     scapy is a requirement for this plugin.
     """
 
+    def _pcap_reader_instance(self, bpf_filter):
+        if sys.platform == "darwin":
+            self._warning_logger("Need tcpdump from Brew for filter to work")
+        if bpf_filter:
+            return scapy.PcapReader(
+                scapy.tcpdump(
+                    self._pcap_filepath, args=["-w", "-", bpf_filter], getfd=True
+                )
+            )
+        else:
+            return scapy.PcapReader(self._pcap_filepath)
+
     @chepy.core.ChepyDecorators.call_stack
     def read_pcap(self):
         """Load a pcap. The state is set to scapy
@@ -378,17 +391,18 @@ class Pcap(chepy.core.ChepyCore):
         return self
 
     @chepy.core.ChepyDecorators.call_stack
-    def pcap_payload(self, layer: str):
+    def pcap_payload(self, layer: str, bpf_filter: str = ""):
         """Get an array of payloads based on provided layer
         
         Args:
-            layer (str): Required. A valid Scapy layer. 
+            layer (str): Required. A valid Scapy layer.
+            bpf_filter (str, optional): Apply a BPF filter to the packets 
         
         Returns:
             Chepy: The Chepy object. 
         """
         hold = []
-        for packet in scapy.PcapReader(self._pcap_filepath):
+        for packet in self._pcap_reader_instance(bpf_filter):
             if not layer in packet:
                 continue
             check_raw = scapy.Raw in packet
@@ -398,7 +412,9 @@ class Pcap(chepy.core.ChepyCore):
         return self
 
     @chepy.core.ChepyDecorators.call_stack
-    def pcap_payload_offset(self, layer: str, start: int, end: int = None):
+    def pcap_payload_offset(
+        self, layer: str, start: int, end: int = None, bpf_filter: str = ""
+    ):
         """Dump the raw payload by offset. 
         
         Args:
@@ -406,6 +422,7 @@ class Pcap(chepy.core.ChepyCore):
             start (int): The starting offset of the data to be extracted. 
                 This could be a negative index number.
             end (int, optional): The end index of the offset.
+            bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
             Chepy: The Chepy object. 
@@ -417,10 +434,9 @@ class Pcap(chepy.core.ChepyCore):
             >>> Chepy('tests/files/test.pcapng').read_pcap().pcap_payload_offset('ICMP', -20)
             [b'secret', b'message']
         """
-        packets = scapy.PcapReader(self._pcap_filepath)
         hold = []
 
-        for packet in packets:
+        for packet in self._pcap_reader_instance(bpf_filter):
             if not layer in packet:
                 continue
             if not scapy.Raw in packet:  # pragma: no cover
@@ -431,21 +447,27 @@ class Pcap(chepy.core.ChepyCore):
         return self
 
     @chepy.core.ChepyDecorators.call_stack
-    def pcap_to_dict(self):
+    def pcap_to_dict(self, bpf_filter: str = ""):
         """Convert a pcap to a dict
+
+        Args:
+            bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
             Chepy: The Chepy object. 
         """
         hold = []
-        for packet in scapy.PcapReader(self._pcap_filepath):
+        for packet in self._pcap_reader_instance(bpf_filter):
             hold.append(_Pkt2Dict(packet).to_dict())
         self.state = hold
         return self
 
     @chepy.core.ChepyDecorators.call_stack
-    def pcap_layer_stats(self):
+    def pcap_layer_stats(self, bpf_filter: str = ""):
         """Get a count of all layers in the pcap
+
+        Args:
+            bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
             Chepy: The Chepy object. 
@@ -458,7 +480,7 @@ class Pcap(chepy.core.ChepyCore):
                 yield pkt.name
 
         layer_dict = collections.OrderedDict()
-        for packet in scapy.PcapReader(self._pcap_filepath):
+        for packet in self._pcap_reader_instance(bpf_filter):
             for key in list(get_layers(packet)):
                 if layer_dict.get(key):
                     layer_dict[key] += 1
@@ -468,14 +490,18 @@ class Pcap(chepy.core.ChepyCore):
         self.state = dict(layer_dict)
         return self
 
-    def pcap_convos(self):
+    def pcap_convos(self, bpf_filter: str = ""):
         """Get layer 3 conversation states
+
+        Args:
+            bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
             Chepy: The Chepy object. 
         """
         convo = collections.OrderedDict()
-        for packet in scapy.PcapReader(self._pcap_filepath):
+
+        for packet in self._pcap_reader_instance(bpf_filter):
             if not scapy.IP in packet:  # pragma: no cover
                 continue
             ip_layer = packet.getlayer(scapy.IP)
