@@ -4,3 +4,4 @@ chepy
 pefile
 pyelftools
 ua-parser
+iocextract
