@@ -26,7 +26,7 @@ class ELFFile(chepy.core.ChepyCore):
         """Get imports from an ELF file
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         hold = {}
         e = self._elf_object()

@@ -25,7 +25,7 @@ class Chepy_Extract(chepy.core.ChepyCore):
             case_insensitive (bool, optional): Case insensitive search. Defaults to True
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         found = {}
         secrets_path = pkg_resources.resource_filename(__name__, "data/secrets.txt")

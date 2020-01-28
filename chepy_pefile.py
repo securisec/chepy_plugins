@@ -28,7 +28,7 @@ class PEFile(chepy.core.ChepyCore):
         """Get certificates used to sign pe file
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
 
         Examples:
             >>> Chepy("tests/files/ff.exe).read_file().pe_get_certificates().o
@@ -128,7 +128,7 @@ class PEFile(chepy.core.ChepyCore):
         """Get all the imports from a PE file
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         pe = self._pe_object()
         pe.parse_data_directories()
@@ -146,7 +146,7 @@ class PEFile(chepy.core.ChepyCore):
         """Get all the exports from a PE file
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
 
         Examples:
             >>> c = Chepy("tests/files/ff.exe").read_file().pe_exports().o

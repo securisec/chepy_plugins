@@ -19,7 +19,7 @@ class UserAgent(chepy.core.ChepyCore):
         Attempts to identify and categorise information contained in a user-agent string.
         
         Returns:
-            Chepy: The Chepy object.
+            ChepyPlugin: The Chepy object.
 
         Examples:
             >>> ua = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.10; rv:62.0) Gecko/20100101 Firefox/62.0"

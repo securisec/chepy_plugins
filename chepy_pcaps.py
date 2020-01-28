@@ -315,7 +315,7 @@ class Pcap(chepy.core.ChepyCore):
         """Load a pcap. The state is set to scapy
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         self._pcap_filepath = str(self._abs_path(self.state))
         self.state = "Pcap loaded"
@@ -326,7 +326,7 @@ class Pcap(chepy.core.ChepyCore):
         """Get DNS queries and their frame numbers
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
 
         Examples:
             >>> Chepy("tests/files/test.pcapng").read_pcap().pcap_dns_queries().o
@@ -357,7 +357,7 @@ class Pcap(chepy.core.ChepyCore):
         certain threshold. 
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         hold = []
         pcap = scapy.rdpcap(self._pcap_filepath)
@@ -399,7 +399,7 @@ class Pcap(chepy.core.ChepyCore):
             bpf_filter (str, optional): Apply a BPF filter to the packets 
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         hold = []
         for packet in self._pcap_reader_instance(bpf_filter):
@@ -425,7 +425,7 @@ class Pcap(chepy.core.ChepyCore):
             bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
 
         Examples:
             In this example, we are extracting all the payloads from the last 20 bytes on 
@@ -454,7 +454,7 @@ class Pcap(chepy.core.ChepyCore):
             bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         hold = []
         for packet in self._pcap_reader_instance(bpf_filter):
@@ -470,7 +470,7 @@ class Pcap(chepy.core.ChepyCore):
             bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
 
         def get_layers(pkt):
@@ -497,7 +497,7 @@ class Pcap(chepy.core.ChepyCore):
             bpf_filter (str, optional): Apply a BPF filter to the packets
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         convo = collections.OrderedDict()
 
@@ -529,7 +529,7 @@ class Pcap(chepy.core.ChepyCore):
             TypeError: If layout is not qwerty or dvorak
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         if layout == "qwerty":
             key_map = PcapUSB.qwerty_map

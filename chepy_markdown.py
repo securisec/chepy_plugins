@@ -17,7 +17,7 @@ class Chepy_Markdown(chepy.core.ChepyCore):
         """Convert markdown syntax to html
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         self.state = markdown(self._convert_to_str())
         return self

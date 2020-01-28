@@ -47,6 +47,7 @@ prompt_toolbar_errors = #ff0000
    plugins/pefile.rst
    plugins/useragent.rst
    core.rst
+   pullreq.rst
 
 
 Indices and tables
