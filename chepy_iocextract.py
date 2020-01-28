@@ -21,7 +21,7 @@ class iocextract(chepy.core.ChepyCore):
         Returns:
             Chepy: The chepy object - A text list of found IOCs (joined by \\n)
         """
-        text_blob = self.state
+        text_blob = self.state.decode('utf-8')
 
         extracted_iocs = []
 
