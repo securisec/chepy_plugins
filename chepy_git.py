@@ -7,7 +7,7 @@ try:
     logging.getLogger("pydriller").setLevel(logging.WARNING)
     from git.exc import InvalidGitRepositoryError
 except ImportError:
-    logging.warning("Could not import markdown. Use pip install pydriller")
+    logging.warning("Could not import pydriller. Use pip install pydriller")
 
 import chepy.core
 
