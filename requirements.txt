@@ -3,5 +3,5 @@ Markdown
 chepy
 pefile
 pyelftools
-ua-parser
+ua-parser==0.8.0
 pydriller
