@@ -41,6 +41,7 @@ prompt_toolbar_errors = #ff0000
    :caption: Contents:
 
    plugins/elffile.rst
+   plugins/exif.rst
    plugins/extract.rst
    plugins/git.rst
    plugins/markdown.rst
