@@ -5,3 +5,4 @@ pefile
 pyelftools
 ua-parser==0.8.0
 pydriller
+pyexiftool
