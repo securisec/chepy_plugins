@@ -1,8 +1,10 @@
-scapy
-Markdown
 chepy
+hachoir==3.1.0
+lazy-import
+Markdown
 pefile
-pyelftools
-ua-parser==0.8.0
 pydriller
+pyelftools
 pyexiftool
+scapy
+ua-parser==0.8.0

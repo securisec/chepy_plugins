@@ -6,8 +6,10 @@ import regex as re
 import logging
 
 try:
-    import scapy.all as scapy
-    import scapy.layers.http as scapy_http
+    import lazy_import
+    scapy = lazy_import.lazy_module('scapy.all')
+    # import scapy.all as scapy
+    
 except ImportError:
     logging.warning("Could not import scapy. Use pip install scapy")
 
@@ -359,6 +361,8 @@ class Pcap(chepy.core.ChepyCore):
         Returns:
             ChepyPlugin: The Chepy object. 
         """
+        import scapy.layers.http as scapy_http
+        
         hold = []
         pcap = scapy.rdpcap(self._pcap_filepath)
         sessions = pcap.sessions(_full_duplex)

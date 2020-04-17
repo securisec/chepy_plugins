@@ -1,5 +1,4 @@
 import logging
-import pkg_resources
 
 try:
     import regex
@@ -27,6 +26,9 @@ class Chepy_Extract(chepy.core.ChepyCore):
         Returns:
             ChepyPlugin: The Chepy object. 
         """
+        # Increase load speed
+        import pkg_resources
+        
         found = {}
         secrets_path = pkg_resources.resource_filename(__name__, "data/secrets.txt")
         with open(secrets_path, "r") as f:

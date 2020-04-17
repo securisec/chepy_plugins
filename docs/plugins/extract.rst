@@ -1,5 +1,5 @@
 Extract Plugin
 """"""""""""""
 
-.. autoclass:: chepy_extract.Chepy_Extract
+.. autoclass:: chepy_forensics.Chepy_Forensics
     :members:

@@ -1,10 +1,5 @@
 import logging
 
-try:
-    from ua_parser.user_agent_parser import Parse as _uap_parse
-except ImportError:
-    logging.warning("Could not import ua-parser. Use pip install ua-parser")
-
 import chepy.core
 
 
@@ -37,5 +32,9 @@ class UserAgent(chepy.core.ChepyCore):
                 "string": "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.10; rv:62.0) Gecko/20100101 Firefox/62.0",
             }
         """
+        try:
+            from ua_parser.user_agent_parser import Parse as _uap_parse
+        except ImportError:
+            logging.warning("Could not import ua-parser. Use pip install ua-parser")
         self.state = _uap_parse(self._convert_to_str())
         return self

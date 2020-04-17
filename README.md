@@ -43,6 +43,7 @@ prompt_toolbar_errors = #ff0000
    plugins/elffile.rst
    plugins/exif.rst
    plugins/extract.rst
+   plugins/forensics.rst
    plugins/git.rst
    plugins/markdown.rst
    plugins/pcap.rst
