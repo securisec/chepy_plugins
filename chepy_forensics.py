@@ -6,7 +6,8 @@ import logging
 
 try:
     import lazy_import
-    lazy_import.lazy_module('hachoir.parser')
+
+    lazy_import.lazy_module("hachoir.parser")
     from hachoir.parser import createParser
     from hachoir.metadata import extractMetadata
     from hachoir.subfile.search import SearchSubfile
@@ -14,7 +15,7 @@ try:
     from hachoir.metadata.metadata_item import QUALITY_BEST
     import hachoir.core.config as hachoir_config
 except ImportError:
-    logging.warning('Could not import hachoir. Use pip install hachoir==3.1.0')
+    logging.warning("Could not import hachoir. Use pip install hachoir==3.1.0")
 
 import chepy.core
 

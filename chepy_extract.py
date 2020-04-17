@@ -28,7 +28,7 @@ class Chepy_Extract(chepy.core.ChepyCore):
         """
         # Increase load speed
         import pkg_resources
-        
+
         found = {}
         secrets_path = pkg_resources.resource_filename(__name__, "data/secrets.txt")
         with open(secrets_path, "r") as f:
