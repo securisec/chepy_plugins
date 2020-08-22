@@ -5,9 +5,6 @@ import tempfile
 import logging
 
 try:
-    import lazy_import
-
-    lazy_import.lazy_module("hachoir.parser")
     from hachoir.parser import createParser
     from hachoir.metadata import extractMetadata
     from hachoir.subfile.search import SearchSubfile
