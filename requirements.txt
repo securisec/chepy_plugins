@@ -8,3 +8,4 @@ pyelftools
 pyexiftool
 scapy
 ua-parser==0.8.0
+reportng
