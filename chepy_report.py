@@ -26,7 +26,7 @@ class Chepy_Report(chepy.core.ChepyCore):
             logging.warning("Could not import exiftool. Use pip install exiftool")
             return
 
-        r = Reportng("Chepy", "securisec")
+        r = Reportng("Securisec", "Chepy", user_css=".navbar{padding: 5;}")
         current_stack = self._stack.copy()
         current_state = self.state
         self.states = self._initial_states
