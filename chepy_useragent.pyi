@@ -1,0 +1,6 @@
+import chepy.core
+from typing import Any
+
+class UserAgent(chepy.core.ChepyCore):
+    state: Any = ...
+    def parse_user_agent(self): ...

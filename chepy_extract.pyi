@@ -1,0 +1,6 @@
+import chepy.core
+from typing import Any
+
+class Chepy_Extract(chepy.core.ChepyCore):
+    state: Any = ...
+    def extract_common_secrets(self, case_insensitive: bool=...) -> Any: ...

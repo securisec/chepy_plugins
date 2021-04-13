@@ -1,0 +1,6 @@
+import chepy.core
+from typing import Any
+
+class Chepy_Exif(chepy.core.ChepyCore):
+    state: Any = ...
+    def get_exif(self): ...

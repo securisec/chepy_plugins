@@ -4,10 +4,35 @@ from pathlib import Path
 import chepy.core
 
 
+def _generate_function(d: dict, as_code: bool = True) -> str:
+    if as_code:
+        run = "c.{}(".format(d["function"])
+    else:
+        run = "{}(".format(d["function"])
+    args: dict = d["args"]
+    if len(args) > 0:
+        for i, k in enumerate(args.items()):
+            run += "{}={}".format(k[0], k[1])
+            if i + 1 != len(args):
+                run += ", "
+    run += ")"
+    return run
+
+
+def _generate_chepy_code(stack) -> str:
+    code = ["from chepy import Chepy\n\nc = Chepy(data)\n"]
+
+    for d in stack:
+        run = _generate_function(d)
+        code.append(run)
+
+    return "\n".join(code)
+
+
 class Chepy_Report(chepy.core.ChepyCore):
     """Generate an html report representaion of the current call stack"""
 
-    def html_view(self, path: str):  # pragma: no cover
+    def html(self, path: str):  # pragma: no cover
         """Generate and write html report
 
         Args:
@@ -26,10 +51,24 @@ class Chepy_Report(chepy.core.ChepyCore):
             logging.warning("Could not import exiftool. Use pip install exiftool")
             return
 
-        r = Reportng("Securisec", "Chepy", user_css=".navbar{padding: 5;}")
+        r = Reportng(
+            "Securisec",
+            "Chepy",
+            user_css="""
+        .navbar{padding: 5;} 
+        h1{font-size: large; text-transform: initial; letter-spacing: 0;}
+        div.container{padding-top:20 !important; padding-bottom:0 !important;}
+        span.bar{background-color: #A4BD00 !important;}
+        span.text-secondary{color: #A4BD00 !important;}
+        """,
+        )
         current_stack = self._stack.copy()
         current_state = self.state
         self.states = self._initial_states
+
+        r.code(
+            "Chepy Python code", _generate_chepy_code(current_stack), is_section=False
+        )
 
         for recipe in current_stack:
             function = recipe["function"]
@@ -37,15 +76,12 @@ class Chepy_Report(chepy.core.ChepyCore):
             if len(args) > 0:
                 getattr(self, function)(**args)
                 r.section(
-                    "{} {}".format(
-                        function,
-                        " ".join(["--{} {}".format(k, v) for (k, v) in args.items()]),
-                    ),
+                    _generate_function(recipe, False),
                     self.state,
                 )
             else:
                 getattr(self, function)()
-                r.section("{}".format(function), self.state)
+                r.section(_generate_function(recipe, False), self.state)
 
         p = str(Path(path).absolute())
         r.save(path=p)
