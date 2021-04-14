@@ -17,7 +17,7 @@ class Chepy_Exif(chepy.core.ChepyCore):
         """Extract EXIF data from a file
         
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object. 
         """
         filename = self._temp_file()
         with exiftool.ExifTool() as et:

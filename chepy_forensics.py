@@ -21,10 +21,10 @@ class Chepy_Forensics(chepy.core.ChepyCore):
     hachoir_config.quiet = True
 
     def _temp_file(self) -> str:
-        """Get a random temporary file. os.urandom is used here 
-        because of permission issues using tempfile on Windows. 
+        """Get a random temporary file. os.urandom is used here
+        because of permission issues using tempfile on Windows.
         The state is then saved in this temp file.
-        
+
         Returns:
             str: cross platform temporary file
         """
@@ -35,12 +35,12 @@ class Chepy_Forensics(chepy.core.ChepyCore):
 
     @chepy.core.ChepyDecorators.call_stack
     def file_mime(self):  # pragma: no cover
-        """Detect the file type based on magic. 
+        """Detect the file type based on magic.
 
-        This method does require python-magic or python-magic-bin to be installed. 
-        
+        This method does require python-magic or python-magic-bin to be installed.
+
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object.
 
         Examples:
             >>> Chepy("tests/files/hello").load_file().get_mime()
@@ -58,12 +58,12 @@ class Chepy_Forensics(chepy.core.ChepyCore):
 
     @chepy.core.ChepyDecorators.call_stack
     def file_magic(self):  # pragma: no cover
-        """Get the file magic 
+        """Get the file magic
 
-        This method does require python-magic or python-magic-bin to be installed. 
-        
+        This method does require python-magic or python-magic-bin to be installed.
+
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         try:
             import magic
@@ -79,12 +79,12 @@ class Chepy_Forensics(chepy.core.ChepyCore):
     @chepy.core.ChepyDecorators.call_stack
     def get_metadata(self):
         """Get metadata from a file
-        
+
         Args:
             set_state (bool, optional): Save the output to state. Defaults to False.
-        
+
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object.
 
         Examples:
             >>> Chepy("logo.png").load_file().get_metadata().o
@@ -117,13 +117,13 @@ class Chepy_Forensics(chepy.core.ChepyCore):
     def embedded_files(self, extract_path: str = None):
         """Search for embedded files and extract them
 
-        This method does not change the state. 
-        
+        This method does not change the state.
+
         Args:
             extract_path (str, optional): Path to extract files to. Defaults to None.
-        
+
         Returns:
-            Chepy: The Chepy object. 
+            ChepyPlugin: The Chepy object.
 
         Examples:
             >>> Chepy("/tmp/stego_50.jpg").load_file().embedded_files(extract_path="/tmp/embedded")
