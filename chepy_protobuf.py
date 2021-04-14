@@ -1,7 +1,8 @@
+import lazy_import
 import logging
 
 try:
-    import blackboxprotobuf
+    blackboxprotobuf = lazy_import.lazy_module("blackboxprotobuf")
 except ImportError:
     logging.warning(
         "Could not import blackboxprotobuf. Use pip install blackboxprotobuf"

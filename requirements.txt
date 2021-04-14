@@ -1,7 +1,6 @@
 chepy
 hachoir==3.1.0
 lazy-import
-Markdown
 pefile
 pydriller
 pyelftools
@@ -11,3 +10,4 @@ ua-parser==0.8.0
 reportng
 protobuf==3.10.0
 blackboxprotobuf
+puremagic

@@ -1,11 +1,12 @@
 import logging
 import regex as re
 from pathlib import Path
+import lazy_import
 
 try:
-    from pydriller import RepositoryMining
+    RepositoryMining = lazy_import.lazy_module("pydriller.RepositoryMining")
+    InvalidGitRepositoryError = lazy_import.lazy_module("git.exc.InvalidGitRepositoryError")
     logging.getLogger("pydriller").setLevel(logging.WARNING)
-    from git.exc import InvalidGitRepositoryError
 except ImportError:
     logging.warning("Could not import pydriller. Use pip install pydriller")
 

@@ -1,6 +1,0 @@
-import chepy.core
-from typing import Any
-
-class Chepy_Markdown(chepy.core.ChepyCore):
-    state: Any = ...
-    def markdown_to_html(self): ...

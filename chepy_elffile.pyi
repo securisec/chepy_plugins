@@ -1,7 +1,9 @@
 import chepy.core
-from OpenSSL import crypto as crypto
-from OpenSSL.crypto import X509 as X509
+from chepy.modules.publickey import OpenSSL as OpenSSL
 from typing import Any
+
+elffile: Any
+relocation: Any
 
 class ELFFile(chepy.core.ChepyCore):
     state: Any = ...

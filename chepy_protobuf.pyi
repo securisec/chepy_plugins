@@ -1,6 +1,8 @@
 import chepy.core
 from typing import Any
 
+blackboxprotobuf: Any
+
 class Chepy_Protobuf(chepy.core.ChepyCore):
     state: Any = ...
     def protobuf_decode_json(self, bytes_as_hex: bool=...) -> Any: ...

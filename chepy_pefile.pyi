@@ -1,6 +1,8 @@
 import chepy.core
 from typing import Any
 
+OpenSSL: Any
+
 class PEFile(chepy.core.ChepyCore):
     state: Any = ...
     def pe_get_certificates(self): ...

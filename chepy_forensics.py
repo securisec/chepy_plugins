@@ -1,3 +1,4 @@
+import lazy_import
 import os
 import logging
 import pathlib
@@ -5,11 +6,12 @@ import tempfile
 import logging
 
 try:
-    from hachoir.parser import createParser
-    from hachoir.metadata import extractMetadata
-    from hachoir.subfile.search import SearchSubfile
-    from hachoir.stream import FileInputStream
-    from hachoir.metadata.metadata_item import QUALITY_BEST
+    hachoir = lazy_import.lazy_module("hachoir")
+    hachoirParser = lazy_import.lazy_module("hachoir.parser")
+    hachoirMeta = lazy_import.lazy_module("hachoir.metadata")
+    hachoirMetaItem = lazy_import.lazy_module("hachoir.metadata.metadata_item")
+    hachoirSubfile = lazy_import.lazy_module("hachoir.subfile.search")
+    hachoirStream = lazy_import.lazy_module("hachoir.stream")
     import hachoir.core.config as hachoir_config
 except ImportError:
     logging.warning("Could not import hachoir. Use pip install hachoir==3.1.0")
@@ -34,29 +36,6 @@ class Chepy_Forensics(chepy.core.ChepyCore):
         return temp_file
 
     @chepy.core.ChepyDecorators.call_stack
-    def file_mime(self):  # pragma: no cover
-        """Detect the file type based on magic.
-
-        This method does require python-magic or python-magic-bin to be installed.
-
-        Returns:
-            ChepyPlugin: The Chepy object.
-
-        Examples:
-            >>> Chepy("tests/files/hello").load_file().get_mime()
-            INFO - application/x-executable
-        """
-        try:
-            import magic
-
-            m = magic.Magic(mime=True)
-            self.state = m.from_buffer(self._convert_to_bytes())
-            return self
-        except ImportError:
-            self._error_logger("Could not import magic. Try pip install python-magic")
-            return self
-
-    @chepy.core.ChepyDecorators.call_stack
     def file_magic(self):  # pragma: no cover
         """Get the file magic
 
@@ -66,11 +45,10 @@ class Chepy_Forensics(chepy.core.ChepyCore):
             ChepyPlugin: The Chepy object.
         """
         try:
-            import magic
+            from puremagic import magic_string
 
-            m = magic.Magic()
-            file_magic = m.from_buffer(self._convert_to_bytes())
-            self.state = file_magic
+            m = magic_string(self._convert_to_bytes())
+            self.state = [dict(x._asdict()) for x in m]
             return self
         except ImportError:
             self._error_logger("Could not import magic. Try pip install python-magic")
@@ -102,11 +80,13 @@ class Chepy_Forensics(chepy.core.ChepyCore):
         """
         filename = self._temp_file()
         filename, realname = filename, filename
-        parser = createParser(filename, realname)
+        parser = hachoirParser.createParser(filename, realname)
         if not parser:  # pragma: no cover
             logging.warning("Unable to parse file")
 
-        metadata = extractMetadata(parser, quality=QUALITY_BEST)
+        metadata = hachoirMeta.extractMetadata(
+            parser, quality=hachoirMetaItem.QUALITY_BEST
+        )
 
         if metadata is not None:
             meta = metadata.exportDictionary()["Metadata"]
@@ -133,8 +113,8 @@ class Chepy_Forensics(chepy.core.ChepyCore):
             [+] File at 10541 size=201 (201 bytes): ZIP archive => /tmp/embedded/file-0002.zip
         """
         filename = self._temp_file()
-        inp = FileInputStream(filename)
-        subfile = SearchSubfile(inp)
+        inp = hachoirStream.FileInputStream(filename)
+        subfile = hachoirSubfile.SearchSubfile(inp)
         if extract_path is not None:  # pragma: no cover
             subfile.setOutput(extract_path)
         subfile.loadParsers()
