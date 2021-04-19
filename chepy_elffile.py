@@ -12,7 +12,7 @@ except ImportError:
 import chepy.core
 
 
-class ELFFile(chepy.core.ChepyCore):
+class Chepy_ELFFile(chepy.core.ChepyCore):
     """This plugin allows Chepy to interface with ELF binaries"""
 
     def _elf_object(self):

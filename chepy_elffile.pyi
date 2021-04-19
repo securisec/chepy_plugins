@@ -5,6 +5,6 @@ from typing import Any
 elffile: Any
 relocation: Any
 
-class ELFFile(chepy.core.ChepyCore):
+class Chepy_ELFFile(chepy.core.ChepyCore):
     state: Any = ...
     def elf_imports(self): ...
