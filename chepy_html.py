@@ -32,11 +32,13 @@ def _generate_chepy_code(stack) -> str:
 class Chepy_Report(chepy.core.ChepyCore):
     """Generate an html report representaion of the current call stack"""
 
-    def html(self, path: str):  # pragma: no cover
+    def html(self, path: str, as_string: bool = True):  # pragma: no cover
         """Generate and write html report
 
         Args:
             path (str): The path to write the report
+            as_string (str, optional): Return the state as a string. False will encode to hex.
+                Defaults to True
 
         Returns:
             ChepyPlugin: The Chepy object.
@@ -77,11 +79,14 @@ class Chepy_Report(chepy.core.ChepyCore):
                 getattr(self, function)(**args)
                 r.section(
                     _generate_function(recipe, False),
-                    self.state,
+                    self.out_as_str() if as_string else self.state,
                 )
             else:
                 getattr(self, function)()
-                r.section(_generate_function(recipe, False), self.state)
+                r.section(
+                    _generate_function(recipe, False),
+                    self.out_as_str() if as_string else self.state,
+                )
 
         p = str(Path(path).absolute())
         r.save(path=p)
