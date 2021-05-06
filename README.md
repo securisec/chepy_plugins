@@ -48,6 +48,8 @@ prompt_toolbar_errors = #ff0000
    plugins/report.rst
    plugins/pcap.rst
    plugins/pefile.rst
+   plugins/protobuf.rst
+   plugins/sqlite.rst
    plugins/useragent.rst
    core.rst
    pullreq.rst
