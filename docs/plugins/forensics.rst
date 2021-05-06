@@ -1,5 +1,5 @@
-Git Plugin
-""""""""""
+Forensics Plugin
+""""""""""""""""
 
-.. autoclass:: chepy_git.Chepy_Git
+.. autoclass:: chepy_forensics.Chepy_Forensics
     :members:
