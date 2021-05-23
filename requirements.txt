@@ -8,6 +8,6 @@ pyexiftool
 scapy
 ua-parser==0.8.0
 reportng
-protobuf==3.10.0
+protobuf==3.14
 blackboxprotobuf
 puremagic
