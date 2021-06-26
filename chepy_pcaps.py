@@ -16,6 +16,8 @@ except ImportError:
 
 import chepy.core
 
+logging.getLogger("scapy").setLevel(logging.ERROR)
+
 
 def _full_duplex(p):  # pragma: no cover
     """Create a full duplex stream from packets
@@ -295,8 +297,8 @@ class PcapUSB:
 
 
 class Pcap(chepy.core.ChepyCore):
-    """This plugin allows handling of various pcap 
-    related operations. 
+    """This plugin allows handling of various pcap
+    related operations.
 
     scapy is a requirement for this plugin.
     """
@@ -316,9 +318,9 @@ class Pcap(chepy.core.ChepyCore):
     @chepy.core.ChepyDecorators.call_stack
     def read_pcap(self):
         """Load a pcap. The state is set to scapy
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         self._pcap_filepath = str(self._abs_path(self.state))
         self.state = "Pcap loaded"
@@ -327,9 +329,9 @@ class Pcap(chepy.core.ChepyCore):
     @chepy.core.ChepyDecorators.call_stack
     def pcap_dns_queries(self):
         """Get DNS queries and their frame numbers
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
 
         Examples:
             >>> Chepy("tests/files/test.pcapng").read_pcap().pcap_dns_queries().o
@@ -354,13 +356,13 @@ class Pcap(chepy.core.ChepyCore):
 
     @chepy.core.ChepyDecorators.call_stack
     def pcap_http_streams(self):
-        """Get a dict of HTTP req/res 
+        """Get a dict of HTTP req/res
 
-        This method does full fully assemble when data exceeds a 
-        certain threshold. 
-        
+        This method does full fully assemble when data exceeds a
+        certain threshold.
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         import scapy.layers.http as scapy_http
 
@@ -398,13 +400,13 @@ class Pcap(chepy.core.ChepyCore):
     @chepy.core.ChepyDecorators.call_stack
     def pcap_payload(self, layer: str, bpf_filter: str = ""):
         """Get an array of payloads based on provided layer
-        
+
         Args:
             layer (str): Required. A valid Scapy layer.
-            bpf_filter (str, optional): Apply a BPF filter to the packets 
-        
+            bpf_filter (str, optional): Apply a BPF filter to the packets
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         hold = []
         for packet in self._pcap_reader_instance(bpf_filter):
@@ -420,22 +422,22 @@ class Pcap(chepy.core.ChepyCore):
     def pcap_payload_offset(
         self, layer: str, start: int, end: int = None, bpf_filter: str = ""
     ):
-        """Dump the raw payload by offset. 
-        
+        """Dump the raw payload by offset.
+
         Args:
-            layer (str): The layer to get the data from. 
-            start (int): The starting offset of the data to be extracted. 
+            layer (str): The layer to get the data from.
+            start (int): The starting offset of the data to be extracted.
                 This could be a negative index number.
             end (int, optional): The end index of the offset.
             bpf_filter (str, optional): Apply a BPF filter to the packets
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
 
         Examples:
-            In this example, we are extracting all the payloads from the last 20 bytes on 
-            on the ICMP layer. 
-            
+            In this example, we are extracting all the payloads from the last 20 bytes on
+            on the ICMP layer.
+
             >>> Chepy('tests/files/test.pcapng').read_pcap().pcap_payload_offset('ICMP', -20)
             [b'secret', b'message']
         """
@@ -457,9 +459,9 @@ class Pcap(chepy.core.ChepyCore):
 
         Args:
             bpf_filter (str, optional): Apply a BPF filter to the packets
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         hold = []
         for packet in self._pcap_reader_instance(bpf_filter):
@@ -473,9 +475,9 @@ class Pcap(chepy.core.ChepyCore):
 
         Args:
             bpf_filter (str, optional): Apply a BPF filter to the packets
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
 
         def get_layers(pkt):
@@ -500,9 +502,9 @@ class Pcap(chepy.core.ChepyCore):
 
         Args:
             bpf_filter (str, optional): Apply a BPF filter to the packets
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         convo = collections.OrderedDict()
 
@@ -526,15 +528,15 @@ class Pcap(chepy.core.ChepyCore):
     @chepy.core.ChepyDecorators.call_stack
     def pcap_usb_keyboard(self, layout: str = "qwerty"):
         """Decode usb keyboard pcap
-        
+
         Args:
             layout (str, optional): Layout of the keyboard. Defaults to "qwerty".
-        
+
         Raises:
             TypeError: If layout is not qwerty or dvorak
-        
+
         Returns:
-            ChepyPlugin: The Chepy object. 
+            ChepyPlugin: The Chepy object.
         """
         if layout == "qwerty":
             key_map = PcapUSB.qwerty_map
