@@ -5,7 +5,7 @@ import lazy_import
 import regex as re
 
 try:
-    RepositoryMining = lazy_import.lazy_class("pydriller.RepositoryMining")
+    RepositoryMining = lazy_import.lazy_class("pydriller.Repository")
     InvalidGitRepositoryError = lazy_import.lazy_module(
         "git.exc.InvalidGitRepositoryError"
     )
@@ -76,10 +76,13 @@ class Chepy_Git(chepy.core.ChepyCore):
         for commit in self._git_instance().traverse_commits():
             try:
                 author = commit.author.name
+                email = commit.author.email
                 if found.get(author) is not None:
-                    found[author] = found[author] + 1
+                    found[author]['count'] = found[author]['count'] + 1
+                    if not email in found[author]['emails'] and email is not None:
+                        found[author]['emails'].append(email)
                 else:
-                    found[author] = 1
+                    found[author] = {'count': 1, 'emails': [email] if email is not None else []}
             except:
                 if show_errors:
                     self._error_logger(commit.hash)
