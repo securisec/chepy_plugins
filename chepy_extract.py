@@ -171,3 +171,45 @@ class Chepy_Extract(chepy.core.ChepyCore):
             etree.fromstring(self._convert_to_bytes()), pretty_print=True
         )
         return self
+
+    @chepy.core.ChepyDecorators.call_stack
+    def html_tags(self, tag: str):
+        """Extract tags from html along with their attributes
+
+        Args:
+            tag (str): A HTML tag
+
+        Returns:
+            Chepy: The Chepy object.
+
+        Examples:
+            >>> Chepy("http://example.com").http_request().html_tags('p').o
+            [
+                {'tag': 'p', 'attributes': {}},
+                {'tag': 'p', 'attributes': {}},
+                {'tag': 'p', 'attributes': {}}
+            ]
+        """
+        tags = []
+
+        for element in self._parsel_obj().xpath("//{}".format(tag)):
+            attributes = []
+            for index, attribute in enumerate(element.xpath("@*"), start=1):
+                attribute_name = element.xpath("name(@*[%d])" % index).extract_first()
+                attributes.append((attribute_name, attribute.extract()))
+            tags.append({"tag": tag, "attributes": dict(attributes)})
+
+        self.state = tags
+        return self
+
+    @chepy.core.ChepyDecorators.call_stack
+    def html_comments(self):
+        """Extract html comments
+
+        Returns:
+            Chepy: The Chepy object.
+        """
+        self.state = list(
+            filter(lambda x: x != "", self._parsel_obj().xpath("//comment()").getall())
+        )
+        return self
