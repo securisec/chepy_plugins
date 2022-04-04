@@ -1,4 +1,3 @@
-from chepy.modules.publickey import OpenSSL
 import lazy_import
 import logging
 

@@ -1,5 +1,4 @@
 import chepy.core
-from chepy.modules.publickey import OpenSSL as OpenSSL
 from typing import Any
 
 elffile: Any
