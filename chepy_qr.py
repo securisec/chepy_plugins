@@ -73,3 +73,26 @@ class Chepy_QR(chepy.core.ChepyCore):
     #     # TODO: Implement this
     #     logging.warning("Not implemented yet")
     #     pass
+    # img = img.convert("1")
+    # h, w = img.size
+    # art_width: int = 64
+    # aspect_ratio = h / w
+    # new_width = art_width
+    # new_height = aspect_ratio * new_width
+    # img = img.resize((new_width, int(new_height)))
+    # # print(img)
+
+    # # pixels = img.getdata()
+
+    # lines = []
+    # for y in range(0, new_width):
+    #     hold = []
+    #     for x in range(0, int(new_height)):
+    #         pixel = img.getpixel((x,y,))
+    #         if pixel > 200:
+    #             hold.append('█')
+    #         else:
+    #             hold.append(' ')
+    #     lines.append(''.join(hold))
+
+    # print('\n'.join(lines))
