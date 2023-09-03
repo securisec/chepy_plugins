@@ -45,6 +45,7 @@ prompt_toolbar_errors = #ff0000
    plugins/extract.rst
    plugins/forensics.rst
    plugins/git.rst
+   plugins/ml.rst
    plugins/report.rst
    plugins/pcap.rst
    plugins/pefile.rst
