@@ -1,0 +1,6 @@
+import chepy.core
+from typing import Any
+
+class Chepy_ML(chepy.core.ChepyCore):
+    state: Any = ...
+    def ml_detect(self): ...
