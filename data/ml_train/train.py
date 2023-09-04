@@ -1,5 +1,4 @@
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     import json
     from chepy import Chepy
     import torch
@@ -63,13 +62,15 @@ if __name__ == '__main__':
                 encoded_string = [char for char in string]
                 max_sequence_length = max(max_sequence_length, len(encoded_string))
                 encoded_data.append((encoded_string, labels[encoding_type]))
-        
+
         return encoded_data, max_sequence_length, labels
 
     encoded_data, max_sequence_length, labels = encode_data(data)
 
     # Split data into train, validation, and test sets
-    train_data, test_data = train_test_split(encoded_data, test_size=0.2, random_state=42)
+    train_data, test_data = train_test_split(
+        encoded_data, test_size=0.2, random_state=42
+    )
     train_data, val_data = train_test_split(train_data, test_size=0.2, random_state=42)
 
     # Create DataLoader for training, validation, and test sets
@@ -78,11 +79,17 @@ if __name__ == '__main__':
     def collate_fn(batch):
         inputs, labels = zip(*batch)
         # Pad sequences within each batch to the maximum length
-        inputs = pad_sequence([torch.tensor(seq, dtype=torch.long) for seq in inputs], batch_first=True, padding_value=0)
+        inputs = pad_sequence(
+            [torch.tensor(seq, dtype=torch.long) for seq in inputs],
+            batch_first=True,
+            padding_value=0,
+        )
         labels = torch.tensor(labels, dtype=torch.long)
         return inputs, labels
 
-    train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+    train_loader = DataLoader(
+        train_data, batch_size=batch_size, shuffle=True, collate_fn=collate_fn
+    )
     val_loader = DataLoader(val_data, batch_size=batch_size, collate_fn=collate_fn)
     test_loader = DataLoader(test_data, batch_size=batch_size, collate_fn=collate_fn)
 
@@ -104,8 +111,8 @@ if __name__ == '__main__':
     hidden_size = 64
     num_classes = len(labels)  # Number of encoding types
 
-    with open(os.path.join(script_dir, "..", "ml_labels.json"), 'w') as f:
-        f.write(json.dumps({v:k for k, v in labels.items()}))
+    with open(os.path.join(script_dir, "..", "ml_labels.json"), "w") as f:
+        f.write(json.dumps({v: k for k, v in labels.items()}))
 
     model = EncoderClassifier(input_size, hidden_size, num_classes)
     criterion = nn.CrossEntropyLoss()
@@ -116,7 +123,7 @@ if __name__ == '__main__':
         model.train()
         for inputs, labels in train_loader:
             optimizer.zero_grad()
-            
+
             outputs = model(inputs)
             loss = criterion(outputs, labels)
             loss.backward()

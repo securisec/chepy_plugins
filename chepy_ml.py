@@ -64,11 +64,15 @@ class Chepy_ML(chepy.core.ChepyCore):
             ChepyPlugin: The Chepy object.
         """
         # Load the trained model
-        model_filename = pkg_resources.resource_filename(__name__, "data/ml_detect_encoding.pth")
+        model_filename = pkg_resources.resource_filename(
+            __name__, "data/ml_detect_encoding.pth"
+        )
         input_size = 1024
         hidden_size = 64
 
-        with open(pkg_resources.resource_filename(__name__, "data/ml_labels.json"), "r") as f:
+        with open(
+            pkg_resources.resource_filename(__name__, "data/ml_labels.json"), "r"
+        ) as f:
             class_labels = json.loads(f.read())
         num_classes = len(
             class_labels
@@ -76,11 +80,13 @@ class Chepy_ML(chepy.core.ChepyCore):
 
         loaded_model = load_model(model_filename, input_size, hidden_size, num_classes)
 
-        top_labels, top_probabilities = predict_encoding(loaded_model, self._convert_to_bytes())
+        top_labels, top_probabilities = predict_encoding(
+            loaded_model, self._convert_to_bytes(), 5
+        )
 
         # Display the top predicted labels and their probabilities
         res = {
-            class_labels[str(label_idx)]: round(probability, 4)
+            class_labels[str(label_idx)]: round(probability, 5)
             for _, (label_idx, probability) in enumerate(
                 zip(top_labels, top_probabilities)
             )
