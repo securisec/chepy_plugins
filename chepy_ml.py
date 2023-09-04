@@ -57,7 +57,7 @@ class Chepy_ML(chepy.core.ChepyCore):
     """This plugin helps run various ML models against the state"""
 
     @chepy.core.ChepyDecorators.call_stack
-    def ml_detect(self):
+    def ml_detect(self, num_top_labels: int = 5):
         """Detect encoding type of the state
 
         Returns:
@@ -81,7 +81,7 @@ class Chepy_ML(chepy.core.ChepyCore):
         loaded_model = load_model(model_filename, input_size, hidden_size, num_classes)
 
         top_labels, top_probabilities = predict_encoding(
-            loaded_model, self._convert_to_bytes(), 5
+            loaded_model, self._convert_to_bytes(), num_top_labels
         )
 
         # Display the top predicted labels and their probabilities
