@@ -44,6 +44,12 @@ if __name__ == '__main__':
         "lz4_compress": [Chepy(x).lz4_compress().o for x in datas],
         "zip_compress": [Chepy(x).zip_compress(fake.word()).o for x in datas],
         "gzip_compress": [Chepy(x).gzip_compress().o for x in datas],
+        "to_upside_down": [Chepy(x).to_upside_down().o for x in datas],
+        "to_messagepack": [Chepy(x).to_messagepack().o for x in datas],
+        "rot_13": [Chepy(x).rot_13().o for x in datas],
+        "rot_47": [Chepy(x).rot_47().o for x in datas],
+        "rot_8000": [Chepy(x).rot_8000().o for x in datas],
+        "bifid_encode": [Chepy(x).bifid_encode(fake.word().upper()).o for x in datas],
         # "xor": [Chepy(x).xor(token_bytes(random.randint(1, 10)).hex()).o for x in datas],
     }
 
