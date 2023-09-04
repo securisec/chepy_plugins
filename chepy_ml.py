@@ -3,22 +3,26 @@
 import chepy.core
 import logging
 from pathlib import Path
+import lazy_import
 
 try:
-    import torch
-    import torch.nn as nn
-    import numpy as np
+    # TODO 🔥 move to lazy resources to speed up
+    # import torch.nn as nn
+    torch = lazy_import.lazy_module("torch")
+    # import torch
+    np = lazy_import.lazy_module("numpy")
+    # import numpy as np
     import json
     import pkg_resources
 except ImportError:
     logging.warning("Could not import pytorch or numpy. Use pip install torch numpy")
 
 # Define the model architecture that matches the one used for training
-class EncoderClassifier(nn.Module):
+class EncoderClassifier(torch.nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
         super(EncoderClassifier, self).__init__()
-        self.embedding = nn.Embedding(input_size, hidden_size)
-        self.fc = nn.Linear(hidden_size, num_classes)
+        self.embedding = torch.nn.Embedding(input_size, hidden_size)
+        self.fc = torch.nn.Linear(hidden_size, num_classes)
 
     def forward(self, x):
         x = self.embedding(x)
@@ -44,7 +48,7 @@ def predict_encoding(model, input_string, top_k=3):
     # Make a prediction
     with torch.no_grad():
         output = model(padded_input)
-        probabilities = nn.functional.softmax(output, dim=1)[0].numpy()
+        probabilities = torch.nn.functional.softmax(output, dim=1)[0].numpy()
 
     # Get the top k predicted labels
     top_k_labels = np.argsort(-probabilities)[:top_k]
