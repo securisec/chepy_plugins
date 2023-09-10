@@ -8,6 +8,7 @@ if __name__ == "__main__":
     from torch.nn.utils.rnn import pad_sequence
     from sklearn.model_selection import train_test_split
     import os
+    from secrets import token_bytes
 
     from fake import gen_data, fake
 
@@ -50,6 +51,7 @@ if __name__ == "__main__":
         "rot_8000": [Chepy(x).rot_8000().o for x in datas],
         "bifid_encode": [Chepy(x).bifid_encode(fake.word().upper()).o for x in datas],
         "cetacean_encode": [Chepy(x).cetacean_encode().o for x in datas],
+        "fernet_encrypt": [Chepy(x).fernet_encrypt(token_bytes(32), True).o for x in datas],
         # "xor": [Chepy(x).xor(token_bytes(random.randint(1, 10)).hex()).o for x in datas],
     }
 
