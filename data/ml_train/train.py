@@ -21,6 +21,7 @@ if __name__ == "__main__":
         "to_base32": [Chepy(x).to_base32().o for x in datas],
         "to_base36": [Chepy(x).to_base36().o for x in datas],
         "to_base58": [Chepy(x).to_base58().o for x in datas],
+        "to_base62": [Chepy(x).to_base62().o for x in datas],
         "to_base64": [Chepy(x).to_base64().o for x in datas],
         "to_base85": [Chepy(x).to_base85().o for x in datas],
         "to_base91": [Chepy(x).to_base91().o for x in datas],
