@@ -30,7 +30,7 @@ def _generate_chepy_code(stack) -> str:
 
 
 class Chepy_Report(chepy.core.ChepyCore):
-    """Generate an html report representaion of the current call stack"""
+    """Generate an html report representation of the current call stack"""
 
     def html(self, path: str, as_string: bool = True):  # pragma: no cover
         """Generate and write html report

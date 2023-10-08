@@ -158,7 +158,7 @@ class Multimedia(chepy.core.ChepyCore):
         """Rotate an image
 
         Args:
-            rotate_by (int): Required. Roate by degrees
+            rotate_by (int): Required. Rotate by degrees
             extension (str, optional): File extension of loaded image. Defaults to png
 
         Returns:
