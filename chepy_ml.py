@@ -60,7 +60,7 @@ def predict_encoding(model, input_string, top_k=3):
 class Chepy_ML(chepy.core.ChepyCore):
     """This plugin helps run various ML models against the state"""
 
-    def ml_magic(self, depth: int = 3):
+    def ml_magic(self, depth: int = 3, verbose=False):
         """Automatically try to decode the state based on detected encoding. Will break on first exception
 
         Args:
@@ -81,7 +81,10 @@ class Chepy_ML(chepy.core.ChepyCore):
                 self.state = out
             except Exception as e:
                 break
-        self.state = hold
+        if verbose:
+            self.state = hold
+        else:
+            self.state = [h["out"] for h in hold]
         return self
 
     # @chepy.core.ChepyDecorators.call_stack
