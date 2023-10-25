@@ -65,6 +65,7 @@ class Chepy_ML(chepy.core.ChepyCore):
 
         Args:
             depth (int, optional): Number of iterations. Defaults to 3.
+            verbose (bool, optional): Include detection weights. Defaults to False.
 
         Returns:
             Chepy: The Chepy object.
