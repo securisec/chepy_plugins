@@ -25,6 +25,7 @@ if __name__ == "__main__":
         "from_base64": [Chepy(x).to_base64().o for x in datas],
         "from_base85": [Chepy(x).to_base85().o for x in datas],
         "from_base91": [Chepy(x).to_base91().o for x in datas],
+        "from_utf21": [Chepy(x).to_utf21().o for x in datas],
         "from_morse_code": [Chepy(x).to_morse_code().o for x in datas],
         "from_charcode": [Chepy(x).to_charcode().o for x in datas],
         "from_binary": [Chepy(x).to_binary().o for x in datas],
