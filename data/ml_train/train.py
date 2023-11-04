@@ -31,6 +31,7 @@ if __name__ == "__main__":
         "from_binary": [Chepy(x).to_binary().o for x in datas],
         "from_octal": [Chepy(x).to_octal().o for x in datas],
         "from_hex": [Chepy(x).to_hex().o for x in datas],
+        "from_uuencode": [Chepy(x).to_uuencode().o for x in datas],
         "from_punycode": [Chepy(x).to_punycode().o for x in datas],
         "from_plaintext": [x.encode() for x in datas],
         "from_affine": [Chepy(x).affine_encode().o for x in datas],
