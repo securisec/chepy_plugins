@@ -2,7 +2,6 @@
 
 import chepy.core
 import logging
-from pathlib import Path
 import lazy_import
 
 try:
@@ -80,7 +79,7 @@ class Chepy_ML(chepy.core.ChepyCore):
                 out = getattr(self, method)().o
                 hold.append({"method": method, "detected": detect_methods, "out": out})
                 self.state = out
-            except Exception as e:
+            except Exception:
                 break
         if verbose:
             self.state = hold
