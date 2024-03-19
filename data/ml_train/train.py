@@ -8,6 +8,7 @@ if __name__ == "__main__":
     from torch.nn.utils.rnn import pad_sequence
     from sklearn.model_selection import train_test_split
     import os
+    import random
     from secrets import token_bytes
 
     from fake import gen_data, fake
@@ -36,7 +37,10 @@ if __name__ == "__main__":
         "from_plaintext": [x.encode() for x in datas],
         "from_affine": [Chepy(x).affine_encode().o for x in datas],
         "from_url_encode": [Chepy(x).to_url_encoding().o for x in datas],
-        "from_html_entity": [Chepy(x).to_html_entity().o for x in datas],
+        "from_html_entity": [
+            Chepy(x).to_html_entity(format=random.choice(["named", "numeric", "hex"])).o
+            for x in datas
+        ],
         "from_bacon": [Chepy(x).to_bacon().o for x in datas],
         "from_pickle": [Chepy(x).to_pickle().o for x in datas],
         "raw_inflate": [Chepy(x).raw_deflate().o for x in datas],
@@ -53,7 +57,9 @@ if __name__ == "__main__":
         "rot_8000": [Chepy(x).rot_8000().o for x in datas],
         "bifid_dencode": [Chepy(x).bifid_encode(fake.word().upper()).o for x in datas],
         "cetacean_dencode": [Chepy(x).cetacean_encode().o for x in datas],
-        "fernet_decrypt": [Chepy(x).fernet_encrypt(token_bytes(32), True).o for x in datas],
+        "fernet_decrypt": [
+            Chepy(x).fernet_encrypt(token_bytes(32), True).o for x in datas
+        ],
         # "xor": [Chepy(x).xor(token_bytes(random.randint(1, 10)).hex()).o for x in datas],
     }
 
