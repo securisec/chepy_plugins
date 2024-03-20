@@ -1,6 +1,5 @@
 import logging
 import json
-import phpserialize
 from lxml import etree
 import lazy_import
 
@@ -70,22 +69,22 @@ class Chepy_Extract(chepy.core.ChepyCore):
         )
         return self
 
-    @chepy.core.ChepyDecorators.call_stack
-    def php_deserialize(self):
-        """Deserialize php to dict
+    # @chepy.core.ChepyDecorators.call_stack
+    # def php_deserialize(self):
+    #     """Deserialize php to dict
 
-        Deserializes PHP serialized data, outputting keyed arrays as a python dict.
+    #     Deserializes PHP serialized data, outputting keyed arrays as a python dict.
 
-        Returns:
-            Chepy: The Chepy object.
+    #     Returns:
+    #         Chepy: The Chepy object.
 
-        Examples:
-            >>> c = Chepy('a:3:{i:1;s:6:"elem 1";i:2;s:6:"elem 2";i:3;s:7:" elem 3";}')
-            >>> c.php_deserialize()
-            {1: b'elem 1', 2: b'elem 2', 3: b' elem 3'}
-        """
-        self.state = phpserialize.loads(self._convert_to_bytes())
-        return self
+    #     Examples:
+    #         >>> c = Chepy('a:3:{i:1;s:6:"elem 1";i:2;s:6:"elem 2";i:3;s:7:" elem 3";}')
+    #         >>> c.php_deserialize()
+    #         {1: b'elem 1', 2: b'elem 2', 3: b' elem 3'}
+    #     """
+    #     self.state = phpserialize.loads(self._convert_to_bytes())
+    #     return self
 
     @chepy.core.ChepyDecorators.call_stack
     def minify_xml(self):

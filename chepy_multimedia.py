@@ -87,7 +87,7 @@ class Multimedia(chepy.core.ChepyCore):
         if resample == "nearest":
             resample = Image.NEAREST
         elif resample == "antialias":
-            resample = Image.ANTIALIAS
+            resample = Image.LANCZOS
         elif resample == "bilinear":
             resample = Image.BILINEAR
         elif resample == "box":
