@@ -15,6 +15,9 @@ if __name__ == "__main__":
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    def random_delim():
+        return random.choice([' ', ';', ':', '\n'])
+
     # Sample data in the format you provided
     datas = gen_data(10)
     data = {
@@ -31,7 +34,7 @@ if __name__ == "__main__":
         "from_charcode": [Chepy(x).to_charcode().o for x in datas],
         "from_binary": [Chepy(x).to_binary().o for x in datas],
         "from_octal": [Chepy(x).to_octal().o for x in datas],
-        "from_hex": [Chepy(x).to_hex().o for x in datas],
+        "from_hex": [Chepy(x).to_hex(delimiter=random_delim()).o for x in datas],
         "from_uuencode": [Chepy(x).to_uuencode().o for x in datas],
         "from_punycode": [Chepy(x).to_punycode().o for x in datas],
         "from_plaintext": [x.encode() for x in datas],
