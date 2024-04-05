@@ -16,7 +16,7 @@ if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     def random_delim():
-        return random.choice([' ', ';', ':', '\n'])
+        return random.choice(['', ' ', ';', ':', '\n'])
 
     # Sample data in the format you provided
     datas = gen_data(10)
