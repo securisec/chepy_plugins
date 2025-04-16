@@ -16,7 +16,8 @@ git clone https://github.com/securisec/chepy_plugins.git
 Then edit the chepy config file, and set the **pluginpath** to the `chepy_plugin` directory. The config file is located in the `$User/.chepy/chepy.conf`. Example config:
 
 ```
-[Plugin]
+[Plugins]
+enableplugins = false
 pluginpath = /home/test/chepy_plugins
 
 [Cli]
