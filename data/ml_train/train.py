@@ -18,7 +18,6 @@ if __name__ == "__main__":
     def random_delim(choices):
         return random.choice(choices)
 
-    # Sample data in the format you provided
     datas = gen_data(11)
     data = {
         "from_base16": [Chepy(x).to_base16().o for x in datas],
@@ -27,7 +26,8 @@ if __name__ == "__main__":
         "from_base58": [Chepy(x).to_base58().o for x in datas],
         "from_base92": [Chepy(x).to_base92().o for x in datas],
         "from_base45": [Chepy(x).to_base45().o for x in datas],
-        "to_base62": [Chepy(x).to_base62().o for x in datas],
+        "from_base62": [Chepy(x).to_base62().o for x in datas],
+        "from_base65536": [Chepy(x).to_base65536().o for x in datas],
         "from_base64": [Chepy(x).to_base64().o for x in datas],
         "from_base85": [Chepy(x).to_base85().o for x in datas],
         "from_base91": [Chepy(x).to_base91().o for x in datas],
