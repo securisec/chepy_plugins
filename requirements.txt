@@ -13,7 +13,7 @@ protobuf
 blackboxprotobuf==1.0.1
 puremagic==1.10
 jsonpath-rw==1.4.0
-lxml==5.1.0
+lxml==6.1.0
 Pillow==10.2.0
 zxing==0.14
 pyzbar==0.1.9
